@@ -16,7 +16,7 @@ id numeric,
     grades"numeric",
     primary key (id),
 foreign key (courses) REFERENCES courses(course_id),
-foreign key (grades) references grade(grade_id)
+foreign key (grades) references grades(grade_id)
 );
 create table if not exists proffesor(
 id numeric,
