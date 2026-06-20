@@ -16,6 +16,7 @@ create table if not exists student(
                                       courses numeric,
                                       grades"numeric",
                                       password varchar(30),
+                                      department varchar(30),
                                       primary key (id),
                                       foreign key (courses) REFERENCES courses(course_id),
                                       foreign key (grades) references grades(grade_id)
@@ -26,6 +27,7 @@ create table if not exists proffesor(
                                         surename varchar(30),
                                         courses numeric,
                                         password varchar(30),
+                                        department varchar(30),
                                         primary key (id),
                                         foreign key (courses) REFERENCES courses(course_id)
 
@@ -36,6 +38,7 @@ create table if not exists secratary(
                                         surename varchar(30),
                                         courses numeric,
                                         password varchar(30),
+                                        department varchar(30),
                                         primary key (id),
                                         foreign key (courses) REFERENCES courses(course_id)
 );
