@@ -23,16 +23,20 @@ public class sql_tester {
             Statement statement
                     = connection.createStatement();
             //Προσωρινό για να "γινεται" ""updated  "" το  db
-        //    String drop_old_table="DROP TABLE  student ";
-        //    statement.execute(drop_old_table);
+         //   String drop_old_table="DROP TABLE  student CASCADE ";
+         //   statement.execute(drop_old_table);
         //    String drop_old_table2="DROP TABLE  secretary ";
         //    statement.execute(drop_old_table2);
-      //      String drop_old_table3="DROP TABLE  proffesor ";
-        //    statement.execute(drop_old_table3);
-            //       String drop_old_table4="DROP TABLE  grades ";
-          //  statement.execute(drop_old_table4);
-         //   String drop_old_table5="DROP TABLE  courses  CASCADE ";
-           // statement.execute(drop_old_table5);
+       //     String drop_old_table3="DROP TABLE  proffesor CASCADE ";
+       //     statement.execute(drop_old_table3);
+        //    String drop_old_table4="DROP TABLE  grades ";
+       //     statement.execute(drop_old_table4);
+       //     String drop_old_table5="DROP TABLE  courses  CASCADE ";
+        //    statement.execute(drop_old_table5);
+      //      String drop_old_table6="DROP TABLE  dilosi   CASCADE ";
+      //      statement.execute(drop_old_table6);
+      //      String drop_old_table7="DROP TABLE  dilosi_k   CASCADE ";
+      //      statement.execute(drop_old_table7);
             // Create a table if not exists
            // String createTableSQL
              //       = "CREATE TABLE  users (id SERIAL PRIMARY KEY,username VARCHAR(500), name VARCHAR(500), password VARCHAR(500),role VARCHAR(500))";
@@ -47,62 +51,110 @@ public class sql_tester {
                     "                                     grade_number numeric,\n" +
                     "                                     primary key (grade_id)\n" +
                     ");\n" +
-                    "create table if not exists courses(\n" +
-                    "                                      course_id numeric,\n" +
-                    "                                      course_name varchar(30),\n" +
-                    "                                      primary key (course_id)\n" +
-                    ");\n" +
                     "create table if not exists student(\n" +
                     "                                      id numeric,\n" +
-                    "                                      name varchar(30),\n" +
-                    "                                      surename varchar(30),\n" +
+                    "                                      username varchar(256),\n" +
+                    "                                      name varchar(256),\n" +
+                    "                                      surename varchar(256),\n" +
                     "                                      courses numeric,\n" +
                     "                                      grades\"numeric\",\n" +
-                    "                                      password varchar(30),\n" +
+                    "                                      password varchar(256),\n" +
+                    "                                      department varchar(256),\n" +
                     "                                      primary key (id),\n" +
-                    "                                      foreign key (courses) REFERENCES courses(course_id),\n" +
                     "                                      foreign key (grades) references grades(grade_id)\n" +
                     ");\n" +
+                    "create table if not exists courses(\n" +
+                    "                                      course_id numeric,\n" +
+                    "                                      course_name varchar(256),\n" +
+                    "                                      primary key (course_id)\n" +
+                    ");\n" +
+                    "create table if not exists dilosi(\n" +
+                    "                                     id numeric,\n" +
+                    "                                     c_id numeric,\n" +
+                    "                                     s_id numeric,\n" +
+                    "                                     primary key  (id),\n" +
+                    "                                     foreign key (c_id) references  courses(course_id),\n" +
+                    "                                     foreign key (s_Id) references  student(id)\n" +
+                    ");\n" +
+                    "\n" +
+                    "\n" +
                     "create table if not exists proffesor(\n" +
                     "                                        id numeric,\n" +
-                    "                                        name varchar(30),\n" +
-                    "                                        surename varchar(30),\n" +
+                    "                                        name varchar(256),\n" +
+                    "                                        username varchar(256),\n" +
+                    "                                        surename varchar(256),\n" +
                     "                                        courses numeric,\n" +
-                    "                                        password varchar(30),\n" +
+                    "                                        password varchar(256),\n" +
+                    "                                        department varchar(256),\n" +
                     "                                        primary key (id),\n" +
                     "                                        foreign key (courses) REFERENCES courses(course_id)\n" +
                     "\n" +
                     ");\n" +
+                    "create table if not exists dilosi_k(\n" +
+                    "                                       id numeric,\n" +
+                    "                                       p_id numeric,\n" +
+                    "                                       c_id numeric,\n" +
+                    "                                       primary key (id),\n" +
+                    "                                       foreign key(p_id) references proffesor(id),\n" +
+                    "                                       foreign key (c_id) references courses(course_Id)\n" +
+                    ");\n" +
                     "create table if not exists secratary(\n" +
                     "                                        id numeric,\n" +
-                    "                                        name varchar(30),\n" +
-                    "                                        surename varchar(30),\n" +
+                    "                                        username varchar(256),\n" +
+                    "                                        name varchar(256),\n" +
+                    "                                        surename varchar(256),\n" +
                     "                                        courses numeric,\n" +
-                    "                                        password varchar(30),\n" +
+                    "                                        password varchar(256),\n" +
+                    "                                        department varchar(256),\n" +
                     "                                        primary key (id),\n" +
                     "                                        foreign key (courses) REFERENCES courses(course_id)\n" +
-                    ");";
+                    ");\n";
 
             statement.execute(vasi_vaggeli);
-    //        String insertSql2 ="INSERT INTO grades (grade_id) VALUES ('0')";
-     //       statement.executeUpdate(insertSql2);
+      //      String insertSql2 ="INSERT INTO grades (grade_id,grade_number) VALUES ('0','10')";
+        //    statement.executeUpdate(insertSql2);
             // Παω να φτιαξω ενα course
-            String insertSql ="INSERT INTO courses (course_id,course_name) VALUES ('5','Προγραμματισμός στο διαδίκτυο')";
+      /*      String insertSql ="INSERT INTO courses (course_id,course_name) VALUES ('5','Μαθηματικός προγραμματισμός')";
             statement.executeUpdate(insertSql);
+            String insertSql3 ="INSERT INTO courses (course_id,course_name) VALUES ('6','Βάσεις Δεδομένων')";
+            statement.executeUpdate(insertSql3);
+
+       */
             // Insert a row into the table
-            String insertSQL= "INSERT INTO student (id,name,surename,courses,grades) VALUES ('24098','kostas','mattas','5','0')";
-            statement.executeUpdate(insertSQL);
+       //     String insertSQL= "INSERT INTO student (id,name,surename,username,courses,grades,password,department) VALUES ('29035','Chris','anthemos','miku','6','0','123','cs')";
+      //      statement.executeUpdate(insertSQL);
+       //     String insertSQL6= "INSERT INTO student (id,name,surename,username,courses,grades,password,department) VALUES ('29067','Efmorfia','kougioumtg','teto','5','0','123','cs')";
+        //    statement.executeUpdate(insertSQL6);
+            String insertSQL2= "INSERT INTO dilosi (id,c_id,s_id) VALUES ('2','5','29035')";
+            statement.executeUpdate(insertSQL2);
+            String insertSQL4= "INSERT INTO proffesor (id,name,surename,courses,password) VALUES ('1','Patsakis','Konstantinos','6','legolas')";
+            statement.executeUpdate(insertSQL4);
+            String insertSql5= "INSERT INTO dilosi_k (id,p_id,c_id) VALUES ('2','1','5')";
+            statement.executeUpdate(insertSql5);
             String selectSQL = "SELECT * FROM student";
             ResultSet resultSet
                     = statement.executeQuery(selectSQL);
             //τυπωνει ολα τα αποτελεσματα
             while (resultSet.next()) {
                 System.out.println(
-                                "User ID: " + resultSet.getInt("id")
-                                      + ", Name: "
+                                "ΔΙλωση ID: " + resultSet.getInt("id")
+                                      + ", course_id: "
                                     + resultSet.getString("name")
-                                        + ",Surename:"
+                                        + "name:"
                                     + resultSet.getString("surename"));
+
+            }
+            String selectSQL2 = "SELECT * FROM dilosi_k";
+            ResultSet resultSet2
+                    = statement.executeQuery(selectSQL2);
+            //τυπωνει ολα τα αποτελεσματα
+            while (resultSet2.next()) {
+                System.out.println(
+                        "ΔΙλωση ID: " + resultSet2.getInt("id")
+                                + ", prof_id: "
+                                + resultSet2.getString("p_id")
+                                + "course_id:"
+                                + resultSet2.getString("c_id"));
 
             }
               //  System.out.println(
