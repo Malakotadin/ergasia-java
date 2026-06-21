@@ -24,7 +24,7 @@ create table if not exists grades
     grade        numeric,
     exetatistiki numeric,
     foreign key (s_id) references student(id),
-    foreign key (c_id) references courses(id),
+    foreign key (c_id) references courses(course_id),
     primary key (s_id,c_id,exetatistiki)
  );
 create table if not exists dilosi(
