@@ -43,7 +43,7 @@ public class SystemDao {
 	public String loginusernameCheck(String username) {
 		String answer = null;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USERS WHERE username=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM student WHERE username=?");
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
             
@@ -67,7 +67,7 @@ public class SystemDao {
 		String status = null;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
-				"SELECT account_locked, locked_until FROM USERS WHERE username=?"
+				"SELECT account_locked, locked_until FROM student WHERE username=?"
 			);
 			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -210,15 +210,18 @@ public class SystemDao {
 	public String passwordCheck(String username, String plainTextPassword) {
 		String answer = null;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT password FROM USERS WHERE username=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT password FROM student WHERE username=?");
+
 			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if (rs.next()) {
+				System.out.println(rs.getString("password"));
 				String storedHash = rs.getString("password");
 				
 				// Verify the password using BCrypt
 				if (verifyPassword(plainTextPassword, storedHash)) {
+					System.out.println("Password_kalo");
 					answer = "You logged in!";
 				} else {
 					answer = "Wrong Password!";
@@ -304,7 +307,7 @@ public class SystemDao {
 	public String getRole(String username) {
 		String role = null;
 		try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT role FROM USERS WHERE username=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT role FROM student WHERE username=?");
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
             
